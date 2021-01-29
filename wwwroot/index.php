@@ -20,6 +20,8 @@ if (isset($get['url'])) {
 
         if (count($ogp) > 0 || count($mf2['items']) > 0 || count($mf2['rels']) > 0 || count($mf2['rel-urls']) > 0) {
             http_response_code(200);
+            $metadata = $ogp;
+            $metadata['mf2'] = $mf2;
             print json_encode($metadata);
             exit();
         }
