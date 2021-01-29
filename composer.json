@@ -1,0 +1,26 @@
+{
+    "name": "marcgoertz/hyperion",
+    "version": "1.0.0",
+    "description": "Meta data to JSON.",
+    "homepage": "https://github.com/Dreamseer/hyperion",
+    "license": "WTFPL",
+    "authors": [
+        {
+        "name": "Marc Görtz",
+        "email": "mail@marcgoertz.de"
+        }
+    ],
+    "funding": [
+        {
+        "type": "kofi",
+        "url": "https://ko-fi.com/dreamseer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.6",
+        "mf2/mf2": "^0.4.6",
+        "mapkyca/php-ogp": "^1.0",
+        "masterminds/html5": "^2.7"
+    }
+}
