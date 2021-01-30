@@ -16,6 +16,10 @@
         "url": "https://ko-fi.com/dreamseer"
         }
     ],
+    "autoload": {
+        "psr-0": {"": "src"},
+        "psr-4": {"": "src"}
+    },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.6",
