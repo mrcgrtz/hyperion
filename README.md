@@ -28,7 +28,7 @@ use Marcgoertz\Hyperion\Parser;
 
 $hyperion = new Parser('https://example.com/');
 if ($hyperion->hasMetadata()) {
-    print_r($hyperion->toArray());
+    print $hyperion->toJSON();
 }
 ```
 
