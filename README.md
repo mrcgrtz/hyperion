@@ -17,6 +17,8 @@ Of course you can also just require it in your scripts directly.
 ## Usage
 
 ```php
+<?php
+
 use Marcgoertz\Hyperion\Parser;
 
 $hyperion = new Parser('https://example.com/');
