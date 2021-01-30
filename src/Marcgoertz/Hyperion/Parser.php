@@ -22,13 +22,17 @@ final class Parser
 
     protected $metadata = [];
 
+    /**
+     * Fetch and parse a URL’s meta data.
+     * @param string $url URL
+     */
     public function __construct(string $url)
     {
         if ($input = \file_get_contents($url)) {
             $ogp = OgpParser::parse($input);
             $mf2 = Mf2Parser\parse($input, $url);
 
-            if ($this->isFilled($ogp, $mf2[self::MF2_ITEMS], $mf2[self::MF2_RELS], $mf2[self::MF2_REL_URLS])) {
+            if ($this->isAnyFilled($ogp, $mf2[self::MF2_ITEMS], $mf2[self::MF2_RELS], $mf2[self::MF2_REL_URLS])) {
                 $this->metadata = $ogp;
                 $this->metadata[self::MF2_ITEMS] = $mf2[self::MF2_ITEMS];
                 $this->metadata[self::MF2_RELS] = $mf2[self::MF2_RELS];
@@ -37,22 +41,35 @@ final class Parser
         }
     }
 
+    /**
+     * Returns meta data as a JSON-encoded string.
+     */
     public function toJSON(): string
     {
         return \json_encode($this->metadata);
     }
 
+    /**
+     * Returns meta data as array.
+     */
     public function toArray(): array
     {
         return $this->metadata;
     }
 
+    /**
+     * Checks if meta data is available.
+     */
     public function hasMetadata(): bool
     {
-        return $this->isFilled($this->metadata);
+        return $this->isAnyFilled($this->metadata);
     }
 
-    private static function isFilled(...$vars): bool
+    /**
+     * Checks if any input is not empty.
+     * @param mixed $vars Input data
+     */
+    private static function isAnyFilled(...$vars): bool
     {
         $filled = false;
 
