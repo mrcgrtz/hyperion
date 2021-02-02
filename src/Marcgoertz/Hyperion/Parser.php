@@ -45,7 +45,7 @@ final class Parser
     }
 
     /**
-     *Fetches the URL (following up to 5 redirects) and, if the
+     * Fetches the URL (following up to 5 redirects) and, if the
      * Content-Type appears to be text/html, returns content.
      */
     protected function fetch()
