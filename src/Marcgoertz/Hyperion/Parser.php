@@ -20,6 +20,7 @@ final class Parser
     private const MF2_RELS = 'rels';
     private const MF2_REL_URLS = 'rel-urls';
 
+    protected $url;
     protected $metadata = [];
 
     /**
@@ -28,9 +29,11 @@ final class Parser
      */
     public function __construct(string $url)
     {
-        if ($input = \file_get_contents($url)) {
+        $this->url = $url;
+
+        if ($input = $this->fetch($this->url)) {
             $ogp = OgpParser::parse($input);
-            $mf2 = Mf2Parser\parse($input, $url);
+            $mf2 = Mf2Parser\parse($input, $this->url);
 
             if ($this->isAnyFilled($ogp, $mf2[self::MF2_ITEMS], $mf2[self::MF2_RELS], $mf2[self::MF2_REL_URLS])) {
                 $this->metadata = $ogp;
@@ -39,6 +42,36 @@ final class Parser
                 $this->metadata[self::MF2_REL_URLS] = $mf2[self::MF2_REL_URLS];
             }
         }
+    }
+
+    /**
+     *Fetches the URL (following up to 5 redirects) and, if the
+     * Content-Type appears to be text/html, returns content.
+     */
+    protected function fetch()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: text/html'
+        ]);
+        $html = curl_exec($ch);
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+
+        if (strpos(strtolower($info['content_type']), 'html') === false) {
+            // content was not delivered as HTML, do not attempt to parse it
+            return null;
+        }
+
+        # update URL to ensure the final one is used to resolve relative URLs
+        $this->url = $info['url'];
+
+        return $html;
     }
 
     /**
@@ -69,7 +102,7 @@ final class Parser
      * Checks if any input is not empty.
      * @param mixed $vars Input data
      */
-    private static function isAnyFilled(...$vars): bool
+    protected static function isAnyFilled(...$vars): bool
     {
         $filled = false;
 
