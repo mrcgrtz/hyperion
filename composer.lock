@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4fe1edde7a7ac1dc042ab5ce45d2205",
+    "content-hash": "114b37f73d92d1c0f1402cca017a4a09",
     "packages": [
         {
             "name": "mapkyca/php-ogp",
@@ -245,7 +245,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": ">=7.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

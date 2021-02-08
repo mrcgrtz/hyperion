@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Marcgoertz\Hyperion;
 
+use JsonException;
 use ogp\Parser as OgpParser;
 use Mf2 as Mf2Parser;
 
@@ -79,7 +80,13 @@ final class Parser
      */
     public function toJSON(): string
     {
-        return \json_encode($this->metadata);
+        try {
+            return \json_encode($this->metadata, JSON_INVALID_UTF8_IGNORE + JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            return \json_encode([
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
