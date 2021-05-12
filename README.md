@@ -6,7 +6,6 @@
 ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/marcgoertz/hyperion)
 ![Packagist License](https://img.shields.io/packagist/l/marcgoertz/hyperion)
 
-
 Super-simple meta data fetching using [php-ogp](https://github.com/mapkyca/php-ogp) and [php-mf2](https://github.com/microformats/php-mf2).
 
 ## Installation
