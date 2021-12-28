@@ -2,18 +2,22 @@
     "name": "marcgoertz/hyperion",
     "version": "1.0.0",
     "description": "Meta data to JSON.",
-    "homepage": "https://github.com/Dreamseer/hyperion",
+    "homepage": "https://github.com/mrcgrtz/hyperion",
     "license": "WTFPL",
     "authors": [
         {
-        "name": "Marc Görtz",
-        "email": "git@marcgoertz.de"
+            "name": "Marc Görtz",
+            "email": "git@marcgoertz.de"
         }
     ],
     "funding": [
         {
-        "type": "kofi",
-        "url": "https://ko-fi.com/mrcgrtz"
+            "type": "kofi",
+            "url": "https://ko-fi.com/mrcgrtz"
+        },
+        {
+            "type": "liberapay",
+            "url": "https://liberapay.com/mrcgrtz"
         }
     ],
     "autoload": {
